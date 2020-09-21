@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AkopyanAK_LAB03</title>
+</head>
+<body>
+    <canvas id="lab03" width="700" height="500" style="border: 4px solid #000000;">
+</canvas>
+
+<script>
+    function Line(line, x0, y0, x1, y1) {
+        let sol = 2;
+        let dX = Math.abs(x1 - x0);
+        let dY = Math.abs(y1 - y0);
+        let plusX = 0;
+        let plusY = 0;
+        
+        
+        if (x0 < x1) {
+            plusX = 1;
+        }
+        else {
+            plusX = -1;
+        }
+                
+        if (y0 < y1) {
+            plusY = 1;
+        }
+        else {
+            plusY = -1;
+        }
+        
+        let ep = dX - dY;
+        
+        line.fillRect(x1, y1, sol, sol);
+
+        while (x0 != x1 || y0 != y1) {
+            line.fillRect(x0, y0, sol, sol);
+            var doubleEp = 2 * ep;
+            if(doubleEp > -dY) {
+                ep -= dY;
+                x0 += plusX;
+            }
+            if (doubleEp < dX) {
+                ep += dX;
+                y0 += plusY;
+            }
+        }
+    }
+
+        var canvas = document.getElementById("lab03");
+        var ctx = canvas.getContext("2d");
+
+        var isClick = 0;
+        canvas.addEventListener("click", function(event) {
+            if (!isClick) {
+                x0 = event.offsetX;
+                y0 = event.offsetY;
+                isClick= true;
+            }
+            else {
+                x1 = event.offsetX;
+                y1 = event.offsetY;
+                Line(ctx, x0, y0, x1, y1);
+                isClick = false;
+            }
+        });
+    </script>
+</body>
+</html>
