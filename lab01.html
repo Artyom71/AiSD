@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AkopyanAK_LAB01</title>
+</head>
+<body style="margin: 0;">
+
+<canvas id="canvas" style="display: block;"> 
+</canvas>
+
+<script>
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext('2d');
+    
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    let i=0;
+    let x0 = 150;
+    let y0 = 100;
+    let isTurn = true;
+
+    
+    setInterval(function() {
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+        ctx.beginPath ();
+        ctx.strokeStyle = 'Orange';
+        i += 0.1;
+        
+        if (x0 <= 500 && isTurn) {
+            x0 += i;
+            ctx.arc (x0, y0, 30, 0, Math.PI * 2, false);
+            if (x0 >= 500) isTurn = false;
+        }
+        else if (x0 >= 150 && !isTurn) {
+            x0 -= i;
+            ctx.arc (x0, y0, 30, 0, Math.PI * 2, false);
+            if (x0 <= 150) isTurn = true;
+        }
+    
+        ctx.stroke();
+
+    }, 50);
+        
+
+    
+</script>
+
+</body>
+</html>
